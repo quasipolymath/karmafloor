@@ -44,7 +44,7 @@ def get_karma_floor_users(submission):
             else:
                 if user_karma < -50:
                     print(redditor.name)
-                    karma_floor_users.add(redditor.name)
+                    karma_floor_users.add(redditor.name.lower())
     return karma_floor_users
 
 
@@ -56,9 +56,9 @@ def write_RES_tags_to_file(user_list):
             tag_dict = json.load(json_data)
 
     for user_name in user_list:
-        tag_dict[user_name] = {"tag": "karmafloor",
-                               "color": "black",
-                               "votes": 0}
+        tag_dict[user_name.lower()] = {"tag": "karmafloor",
+                                       "color": "black",
+                                       "votes": 0}
 
     with open('RES_tags.json', 'w') as outfile:
         json.dump(tag_dict, outfile, sort_keys=True, separators=(',', ':'))
